@@ -1,3 +1,5 @@
+@import url('https://rsms.me/inter/inter.css');
+
 html {
     background-color: black;
     color: white;
@@ -12,6 +14,7 @@ body, resize-content {
 #clock {
     font-family: Inter, sans-serif;
     font-weight: 900;
+    margin: 10px;
     font-size: 100px;
         background-image: linear-gradient(0deg, var(--gradient-bottom) 0%, var(--gradient-top) 100%);
         background-color: white;

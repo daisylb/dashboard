@@ -9,6 +9,8 @@ template.innerHTML = `
   width: 100%;
   align-items: center;
   justify-content: center;
+  margin: 0;
+  overflow: hidden;
 }
 </style>
 <div id='outer'>
