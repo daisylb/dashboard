@@ -4,16 +4,19 @@
   "main": "index.js",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "parcel src/index.pug",
-    "build": "parcel build src/index.pug"
+    "start": "snowpack dev",
+    "build": "snowpack build"
   },
   "dependencies": {
     "domready": "^1.0.8",
-    "parcel-bundler": "^1.12.4"
+    "svelte": "^3.37.0"
   },
   "devDependencies": {
-    "pug": "^2.0.4",
-    "sass": "^1.26.5",
+    "@snowpack/plugin-svelte": "^3.6.1",
+    "@snowpack/plugin-typescript": "^1.2.1",
+    "@types/domready": "^1.0.0",
+    "snowpack": "^3.3.5",
+    "svelte-preprocess": "^4.7.2",
     "typescript": "^3.8.3"
   },
   "browserslist": [
