@@ -1,5 +1,5 @@
-import Clock from "./clock.svelte"
+import App from "./app.svelte"
 import domready from "domready"
 domready(() => {
-  new Clock({ target: document.getElementById("mount-point")! })
+  new App({ target: document.getElementById("mount-point")! })
 })

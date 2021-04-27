@@ -58,16 +58,11 @@
   })
 </script>
 
-<div id="outer">
-  <Resize>
-    <div id="clock" bind:this={clock}>{time}</div>
-  </Resize>
-</div>
+<Resize>
+  <div id="clock" bind:this={clock}>{time}</div>
+</Resize>
 
 <style>
-  #outer {
-    height: 100vh;
-  }
   #clock {
     font-family: Inter, sans-serif;
     font-weight: 900;
