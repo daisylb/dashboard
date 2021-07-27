@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "snowpack dev",
-    "build": "snowpack build"
+    "build": "snowpack build --polyfill-node"
   },
   "dependencies": {
     "domready": "^1.0.8",
