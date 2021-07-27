@@ -6,8 +6,9 @@ const Config = rt.Record({
 
 const hash = window.location.hash
 let error: string | undefined = undefined
+let obj: any
 try {
-  const obj = JSON.parse(decodeURIComponent(hash.substr(1)))
+  obj = JSON.parse(decodeURIComponent(hash.substr(1)))
 } catch (e) {
   console.log(e)
   error = e?.message ?? e + ""
