@@ -7,13 +7,11 @@ const Config = rt.Record({
 const hash = window.location.hash
 let error: string | undefined = undefined
 try {
-  const obj = JSON.parse(hash.substr(1))
+  const obj = JSON.parse(decodeURIComponent(hash.substr(1)))
 } catch (e) {
   console.log(e)
   error = e?.message ?? e + ""
 }
-const data = error
-  ? { success: false, message: error }
-  : Config.validate(JSON.parse(decodeURIComponent(hash.substr(1))))
+const data = error ? { success: false, message: error } : Config.validate(obj)
 
 export default data
