@@ -1,11 +1,7 @@
 <script lang="typescript">
   import domready from "domready"
   import Resize from "./resize.svelte"
-
-  const FORMATTER = Intl.DateTimeFormat("en-AU-u-hc-h23", {
-    hour: "numeric",
-    minute: "numeric",
-  })
+  import time from "./time"
 
   const NIGHT_GRADIENT: Keyframe = {
     "--gradient-top": "#cc00ff",
@@ -32,15 +28,10 @@
     inherits: false,
   })
 
-  let time = ""
+  $: formattedTime = $time.toFormat("HH:mm")
   let clock: HTMLElement | null = null
 
   domready(() => {
-    const updateClock = () => {
-      const now = new Date()
-      time = FORMATTER.format(now)
-      setTimeout(updateClock, 60_000 - (now.getTime() % 60_000))
-    }
     const animation = clock!.animate(
       [
         NIGHT_GRADIENT,
@@ -54,12 +45,11 @@
     const now = new Date()
     animation.currentTime =
       (now.getTime() - now.getTimezoneOffset() * 60_000) % 86_400_000
-    updateClock()
   })
 </script>
 
 <Resize>
-  <div id="clock" bind:this={clock}>{time}</div>
+  <div id="clock" bind:this={clock}>{formattedTime}</div>
 </Resize>
 
 <style>

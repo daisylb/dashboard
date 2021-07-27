@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "domready": "^1.0.8",
+    "ical": "^0.8.0",
+    "ical.js": "^1.4.0",
+    "luxon": "^1.26.0",
     "svelte": "^3.37.0"
   },
   "devDependencies": {
@@ -16,6 +19,8 @@
     "@snowpack/plugin-typescript": "^1.2.1",
     "@tsconfig/svelte": "^1.0.10",
     "@types/domready": "^1.0.0",
+    "@types/ical": "^0.6.2",
+    "@types/luxon": "^1.26.5",
     "snowpack": "^3.3.5",
     "svelte-preprocess": "^4.7.2",
     "typescript": "^3.8.3"
