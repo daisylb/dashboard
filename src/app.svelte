@@ -1,14 +1,19 @@
 <script lang="typescript">
   import Clock from "./clock.svelte"
   import Calendar from "./calendar/index.svelte"
+  import config from './config'
 </script>
 
+{#if config.success}
 <div id="outer">
   <div id="clock">
     <Clock />
   </div>
   <div id="calendar"><Calendar /></div>
 </div>
+{:else}
+{config.message}
+{/if}
 
 <style>
   :global(body) {
