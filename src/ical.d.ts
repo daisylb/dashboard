@@ -49,8 +49,8 @@ declare module "ical.js" {
   export class Event {
     public uid: string
     public summary: string
-    public startDate: Time
-    public endDate: Time
+    public startDate: Time & { tz: string }
+    public endDate: Time & { tz: string }
     public description: string
     public location: string
     public attendees: Property[]

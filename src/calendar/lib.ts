@@ -8,6 +8,14 @@ export type EventOccurrence = {
   override?: ical.CalendarComponent
 }
 
+type IcalDate = Date & { tz: string }
+
+function icalToLuxon(icalDate: IcalDate): DateTime {
+  return DateTime.fromJSDate(icalDate).setZone(icalDate.tz, {
+    keepCalendarTime: true,
+  })
+}
+
 export function* getEventsInRange(
   calendar: ical.FullCalendar,
   start: DateTime,
@@ -20,6 +28,13 @@ export function* getEventsInRange(
     const event = calendar[eventID]
 
     if (event.type !== "VEVENT") continue
+
+    // skip events I've declined
+    if (
+      typeof event.attendee !== "string" &&
+      event.attendee?.params?.PARTSTAT === "DECLINED"
+    )
+      continue
 
     if (!event.start || !event.end) {
       console.warn(`Event ${eventID} missing start and end`, event)
@@ -42,31 +57,37 @@ export function* getEventsInRange(
         for (const overrideKey in event.recurrences) {
           if (!event.recurrences.hasOwnProperty(overrideKey)) continue
           const override = event.recurrences[overrideKey]
+          // skip overrides I've declined
+          if (
+            typeof override.attendee !== "string" &&
+            override.attendee?.params?.PARTSTAT === "DECLINED"
+          )
+            continue
           if (!override.start || !override.end) {
             console.warn(
               `Event ${override.recurrenceid} (a recurrence of ${eventID}) missing start and end`,
             )
             continue
           }
-          const evtStart = DateTime.fromJSDate(override.start)
+          const evtStart = icalToLuxon(override.start as IcalDate)
           exceptions.add(overrideKey)
           if (start < evtStart && evtStart < end) {
-            const evtEnd = DateTime.fromJSDate(override.end)
+            const evtEnd = icalToLuxon(override.end as IcalDate)
             yield { start: evtStart, end: evtEnd, event, override }
           }
         }
       }
 
       for (const startDate of event.rrule.between(startJS, endJS)) {
-        const evtStart = DateTime.fromJSDate(startDate)
+        const evtStart = icalToLuxon(startDate as IcalDate)
         if (exceptions.has(evtStart.toFormat("yyyy-LL-dd"))) continue
         const evtEnd = evtStart.plus(eventDuration)
         yield { start: evtStart, end: evtEnd, event }
       }
     } else {
-      const evtStart = DateTime.fromJSDate(event.start)
+      const evtStart = icalToLuxon(event.start as IcalDate)
       if (start < evtStart && evtStart < end) {
-        const evtEnd = DateTime.fromJSDate(event.end)
+        const evtEnd = icalToLuxon(event.end as IcalDate)
         yield { start: evtStart, end: evtEnd, event }
       }
     }

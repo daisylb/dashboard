@@ -13,6 +13,8 @@ try {
   console.log(e)
   error = e?.message ?? e + ""
 }
-const data = error ? { success: false, message: error } : Config.validate(obj)
+const data = error
+  ? { success: false as const, message: error }
+  : Config.validate(obj)
 
 export default data

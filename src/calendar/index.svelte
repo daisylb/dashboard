@@ -16,6 +16,7 @@
       (a, b) => a.start.valueOf() - b.start.valueOf(),
     )
   }, 300_000)
+  $: (window as any).todaysEvents = $todaysEvents
 </script>
 
 <div>

@@ -16,9 +16,9 @@
 <div id="root" class:finished={isFinished}>
   <div id="infobar">
     <div id="absDate">
-      {item.start.toLocaleString(
+      {item.start.toLocal().toLocaleString(
         DateTime.DATETIME_SHORT,
-      )}&thinsp;&ndash;&thinsp;{item.end.toLocaleString(endFormat)}
+      )}&thinsp;&ndash;&thinsp;{item.end.toLocal().toLocaleString(endFormat)}
     </div>
     {#if isStarted}
       {#if isFinished}ended{:else}ends{/if}
