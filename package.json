@@ -8,22 +8,30 @@
     "build": "snowpack build --polyfill-node"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "domready": "^1.0.8",
     "ical": "^0.8.0",
     "ical.js": "^1.4.0",
     "luxon": "^1.26.0",
+    "ptv-api-signature": "^1.0.7",
     "runtypes": "^6.3.1",
-    "svelte": "^3.37.0"
+    "sodium-native": "^3.2.1",
+    "svelte": "^3.37.0",
+    "underscore": "^1.13.1"
   },
   "devDependencies": {
+    "@netlify/functions": "^0.7.2",
     "@snowpack/plugin-svelte": "^3.6.1",
     "@snowpack/plugin-typescript": "^1.2.1",
     "@tsconfig/svelte": "^1.0.10",
     "@types/domready": "^1.0.0",
     "@types/ical": "^0.6.2",
     "@types/luxon": "^1.26.5",
+    "@types/sodium-native": "^2.3.5",
+    "@types/underscore": "^1.11.3",
     "snowpack": "^3.3.5",
     "svelte-preprocess": "^4.7.2",
+    "ts-node": "^10.2.0",
     "typescript": "^3.8.3"
   },
   "browserslist": [

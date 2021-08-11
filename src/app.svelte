@@ -2,7 +2,7 @@
   import Clock from "./clock.svelte"
   import Calendar from "./calendar/index.svelte"
   import config from './config'
-import Timetable from "./timetable.svelte"
+import Timetable from "./timetable/index.svelte"
 </script>
 
 {#if config.success}

@@ -2,6 +2,10 @@ import * as rt from "runtypes"
 
 const Config = rt.Record({
   calendarUrls: rt.Array(rt.String),
+  departures: rt.Record({
+    stopId: rt.Number,
+    directionGroups: rt.Array(rt.Array(rt.Number)),
+  }),
 })
 
 const hash = window.location.hash

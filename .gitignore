@@ -1,2 +1,4 @@
 dist
 yarn-error.log
+netlify/functions/_secrets.json
+.netlify

@@ -6,6 +6,11 @@
     "lib": ["ESNext", "DOM"],
     "strict": true
   },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
   "extends": "@tsconfig/svelte/tsconfig.json",
 
   "include": ["src/**/*", "src/node_modules"],
