@@ -5,26 +5,31 @@
 
   export let item: EventOccurrence
 
+  const differentDay: Intl.DateTimeFormatOptions = {month: 'short', day: 'numeric'}
+
+  $: startLocal = item.start.toLocal()
+  $: endLocal = item.end.toLocal()
   $: isStarted = $time.diff(item.start).milliseconds > 0
   $: isFinished = $time.diff(item.end).milliseconds > 0
+  $: startFormat = $time.startOf('day').equals(startLocal.startOf('day')) ? DateTime.TIME_SIMPLE : differentDay
   $: endFormat =
-    item.end.startOf("day").equals(item.start.startOf("day"))
+    $time.startOf("day").equals(endLocal.startOf("day"))
       ? DateTime.TIME_SIMPLE
-      : DateTime.DATETIME_SHORT
+      : differentDay
 </script>
 
 <div id="root" class:finished={isFinished}>
   <div id="infobar">
     <div id="absDate">
-      {item.start.toLocal().toLocaleString(
-        DateTime.DATETIME_SHORT,
-      )}&thinsp;&ndash;&thinsp;{item.end.toLocal().toLocaleString(endFormat)}
+      {startLocal.toLocaleString(
+        startFormat,
+      )}&thinsp;&ndash;&thinsp;{endLocal.toLocaleString(endFormat)}
     </div>
     {#if isStarted}
       {#if isFinished}ended{:else}ends{/if}
-      {item.end.toRelative()}
+      {item.end.toRelative({style: 'narrow'})}
     {:else}
-      {item.start.toRelative()}
+      {item.start.toRelative({style: 'narrow'})}
     {/if}
   </div>
   <div id="description">
@@ -38,10 +43,10 @@
     margin: 1vh;
   }
   #root.finished {
-    opacity: 0.7;
+    opacity: 0.6;
   }
   #infobar {
-    font-size: 2vh;
+    font-size: 1.7vh;
     display: flex;
     flex-direction: row;
   }
@@ -49,6 +54,6 @@
     flex: 1;
   }
   #description {
-    font-size: 3vh;
+    font-size: 2.5vh;
   }
 </style>

@@ -55,6 +55,7 @@
 <style>
   #clock {
     font-family: Inter, sans-serif;
+    font-variant-numeric: tabular-nums;
     font-weight: 900;
     margin: 10px;
     font-size: 100px;

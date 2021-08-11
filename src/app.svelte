@@ -2,6 +2,7 @@
   import Clock from "./clock.svelte"
   import Calendar from "./calendar/index.svelte"
   import config from './config'
+import Timetable from "./timetable.svelte"
 </script>
 
 {#if config.success}
@@ -10,6 +11,7 @@
     <Clock />
   </div>
   <div id="calendar"><Calendar /></div>
+  <div id="timetable"><Timetable /></div>
 </div>
 {:else}
 {config.message}
@@ -22,11 +24,17 @@
     font-family: Inter, sans-serif;
   }
   #outer {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     height: 100vh;
+    grid-template: "clock clock" 30vh "calendar timetable" auto / 1fr 1fr;
   }
   #clock {
-    height: 30vh;
+    grid-area: clock;
+  }
+  #calendar {
+    grid-area: calendar;
+  }
+  #timetable {
+    grid-area:  timetable;
   }
 </style>
