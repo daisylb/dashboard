@@ -46,10 +46,13 @@
     animation.currentTime =
       (now.getTime() - now.getTimezoneOffset() * 60_000) % 86_400_000
   })
+  function reload(){
+    window.location.reload()
+  }
 </script>
 
 <Resize>
-  <div id="clock" bind:this={clock}>{formattedTime}</div>
+  <div id="clock" bind:this={clock} on:click={reload}>{formattedTime}</div>
 </Resize>
 
 <style>
