@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "UNLICENSED",
   "scripts": {
+    "write-netlify-config": "ts-node netlify/write-config.ts",
     "start": "snowpack dev",
     "build": "snowpack build --polyfill-node"
   },
@@ -27,6 +28,7 @@
     "@types/domready": "^1.0.0",
     "@types/ical": "^0.6.2",
     "@types/luxon": "^1.26.5",
+    "@types/node": "^16.6.1",
     "@types/sodium-native": "^2.3.5",
     "@types/underscore": "^1.11.3",
     "snowpack": "^3.3.5",
