@@ -9,7 +9,7 @@ import { open } from "fs/promises"
         clientId: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         redirectUri:
-          "https://leigh-dashboard.netlify.com/.netlify/functions/gauth",
+          "https://leigh-dashboard.netlify.app/.netlify/functions/gauth",
       },
       sodium: {
         sk: process.env.SODIUM_SK,
