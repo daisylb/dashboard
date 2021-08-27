@@ -25,11 +25,12 @@
         startFormat,
       )}&thinsp;&ndash;&thinsp;{endLocal.toLocaleString(endFormat)}
     </div>
+    <!-- the `$time &&` doesn't actually affect the output, but forces a re-render every minute -->
     {#if isStarted}
       {#if isFinished}ended{:else}ends{/if}
-      {item.end.toRelative({style: 'narrow'})}
+      {$time && item.end.toRelative({style: 'narrow'})}
     {:else}
-      {item.start.toRelative({style: 'narrow'})}
+      {$time && item.start.toRelative({style: 'narrow'})}
     {/if}
   </div>
   <div id="description">
