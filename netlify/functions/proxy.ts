@@ -10,6 +10,13 @@ import { pathWithSig } from "ptv-api-signature"
 import * as secrets from "./_secrets.json"
 import { OAuth2Client } from "google-auth-library"
 import { decryptKey } from "../lib/crypto"
+import { createClient } from "redis"
+import { promisify } from "util"
+
+const redisClient = createClient({
+  url: secrets.redis,
+  tls: true,
+})
 
 const domainHandlers = new Map<
   string,
@@ -74,10 +81,29 @@ domainHandlers.set(
       event.queryStringParameters!.key!,
     )
     console.log("refreshToken", refreshToken)
+    const redisResult = await promisify(redisClient.get).call(
+      redisClient,
+      `tokens.1.${refreshToken}`,
+    )
+    const [accessToken, expiryStr] = redisResult
+      ? redisResult.split("\u001f")
+      : [undefined, undefined]
     client.setCredentials({
       refresh_token: refreshToken,
+      access_token: accessToken,
+      expiry_date: Number.parseInt(expiryStr),
+    })
+    client.on("tokens", async (tokens) => {
+      console.log("writing new tokens", tokens)
+      await promisify(redisClient.set).call(
+        redisClient,
+        `tokens.1.${refreshToken}`,
+        `${tokens.access_token}\u001f${tokens.expiry_date}`,
+      )
     })
     const headers = await client.getRequestHeaders()
+    const newAccessToken = (await client.getAccessToken()).token
+    console.log("at from redis", accessToken, "new at", newAccessToken)
     console.log("headers", headers)
     const resp = await axios.request({
       url: url.toString(),

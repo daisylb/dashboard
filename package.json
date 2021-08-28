@@ -16,6 +16,7 @@
     "ical.js": "^1.4.0",
     "luxon": "^1.26.0",
     "ptv-api-signature": "^1.0.7",
+    "redis": "^3.1.2",
     "runtypes": "^6.3.1",
     "sodium-native": "^3.2.1",
     "svelte": "^3.37.0",

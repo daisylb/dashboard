@@ -14,6 +14,7 @@ import { open } from "fs/promises"
       sodium: {
         sk: process.env.SODIUM_SK,
       },
+      redis: process.env.REDIS_URL,
     }),
   )
 })()
