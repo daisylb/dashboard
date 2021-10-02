@@ -46,7 +46,7 @@ declare module "ical.js" {
     public addSubcomponent(component: Component): Component
   }
 
-  export type OccurrenceDetails {
+  export type OccurrenceDetails = {
     recurrenceId: Time
     item: Event
     startDate: Time
@@ -178,13 +178,13 @@ declare module "ical.js" {
       data:
         | Component
         | {
-          component: string | Component
-          tzid?: string
-          location?: string
-          tznames?: string
-          latitude?: number
-          longitude?: number
-        },
+            component: string | Component
+            tzid?: string
+            location?: string
+            tznames?: string
+            latitude?: number
+            longitude?: number
+          },
     )
   }
 
