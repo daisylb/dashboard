@@ -5,17 +5,21 @@
 
   export let item: EventOccurrence
 
-  const differentDay: Intl.DateTimeFormatOptions = {month: 'short', day: 'numeric'}
+  const differentDay: Intl.DateTimeFormatOptions = {
+    month: "short",
+    day: "numeric",
+  }
 
   $: startLocal = item.start.toLocal()
   $: endLocal = item.end.toLocal()
   $: isStarted = $time.diff(item.start).milliseconds > 0
   $: isFinished = $time.diff(item.end).milliseconds > 0
-  $: startFormat = $time.startOf('day').equals(startLocal.startOf('day')) ? DateTime.TIME_SIMPLE : differentDay
-  $: endFormat =
-    $time.startOf("day").equals(endLocal.startOf("day"))
-      ? DateTime.TIME_SIMPLE
-      : differentDay
+  $: startFormat = $time.startOf("day").equals(startLocal.startOf("day"))
+    ? DateTime.TIME_SIMPLE
+    : differentDay
+  $: endFormat = $time.startOf("day").equals(endLocal.startOf("day"))
+    ? DateTime.TIME_SIMPLE
+    : differentDay
 </script>
 
 <div id="root" class:finished={isFinished}>
@@ -28,13 +32,13 @@
     <!-- the `$time &&` doesn't actually affect the output, but forces a re-render every minute -->
     {#if isStarted}
       {#if isFinished}ended{:else}ends{/if}
-      {$time && item.end.toRelative({style: 'narrow'})}
+      {$time && item.end.toRelative({ style: "narrow" })}
     {:else}
-      {$time && item.start.toRelative({style: 'narrow'})}
+      {$time && item.start.toRelative({ style: "narrow" })}
     {/if}
   </div>
   <div id="description">
-    {item.override?.summary || item.event.summary}
+    {item.event.summary}
   </div>
 </div>
 
