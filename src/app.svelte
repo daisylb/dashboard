@@ -22,6 +22,8 @@ import Timetable from "./timetable/index.svelte"
     background-color: black;
     color: white;
     font-family: Inter, sans-serif;
+    margin: 0;
+    padding: 0;
   }
   #outer {
     display: grid;

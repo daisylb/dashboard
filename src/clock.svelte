@@ -15,18 +15,20 @@
     "--gradient-top": "white",
     "--gradient-bottom": "#69c9ff",
   }
-  ;(window.CSS as any).registerProperty({
-    name: "--gradient-top",
-    syntax: "<color>",
-    initialValue: "white",
-    inherits: false,
-  })
-  ;(window.CSS as any).registerProperty({
-    name: "--gradient-bottom",
-    syntax: "<color>",
-    initialValue: "white",
-    inherits: false,
-  })
+  try {
+    ;(window.CSS as any).registerProperty({
+      name: "--gradient-top",
+      syntax: "<color>",
+      initialValue: "white",
+      inherits: false,
+    })
+    ;(window.CSS as any).registerProperty({
+      name: "--gradient-bottom",
+      syntax: "<color>",
+      initialValue: "white",
+      inherits: false,
+    })
+  } catch {}
 
   $: formattedTime = $time.toFormat("HH:mm")
   let clock: HTMLElement | null = null
