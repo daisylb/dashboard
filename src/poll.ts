@@ -1,4 +1,5 @@
-import { readable, Readable } from "svelte/store"
+import { readable } from "svelte/store"
+import type { Readable } from "svelte/store"
 import { DateTime } from "luxon"
 
 export const LOADING = Symbol("LOADING")

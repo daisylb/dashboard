@@ -15,7 +15,7 @@ try {
   obj = JSON.parse(decodeURIComponent(hash.substr(1)))
 } catch (e) {
   console.log(e)
-  error = e?.message ?? e + ""
+  error = e + ""
 }
 const data = error
   ? { success: false as const, message: error }
